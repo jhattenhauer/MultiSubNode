@@ -3,25 +3,21 @@ import message_filters
 from std_msgs.msg import String
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy
+import csv
 
 class Syncer(Node):
     def __init__(self):
         super().__init__("syncer")
-        message1 = message_filters.Subscriber(
-            self, String, "topic1")
-        message2 = message_filters.Subscriber(
-            self, String, "topic2")
+        message1 = message_filters.Subscriber(self, String, "topic1")
+        message2 = message_filters.Subscriber(self, String, "topic2")
 
-        queue_size = 10
-        delay = 1.0
-        self.ts = message_filters.ApproximateTimeSynchronizer(
-            [message1, message2], queue_size, delay)
-        self.ts.registerCallback(self._cb)
+        self.ts = message_filters.ApproximateTimeSynchronizer([message1, message2], 10, 0.5, allow_headerless=True)
+        self.ts.registerCallback(self.callback)
 
-    def _cb(self, msg_1, msg_2):
-        self.get_logger().info("Received messages!!")
-        self.get_logger().info(f"from Foo: {msg_1}")
-        self.get_logger().info(f"from Bar: {msg_2}")
+    def callback(self, msg_1, msg_2):
+        message1 = str(msg_1)
+        message2 = str(msg_2)
+        print(message1[26:-2], message2[26:-2])
 
 def main():
     rclpy.init()
