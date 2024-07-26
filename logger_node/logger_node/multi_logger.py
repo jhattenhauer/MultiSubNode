@@ -46,11 +46,11 @@ class Syncer(Node):
         Velocity_local_msg = str(Velocity_local)
 
         fields = [Compass_hdg_msg, Global_msg, Gp_lp_offset_msg, Gp_orgin_msg, Local_msg, Fix_msg, Gps_vel_msg, Satellites_msg, Rel_alt_msg, Accel_msg, Odom_msg, Pose_msg, Pose_cov_msg, Velocity_body_msg, Velocity_body_cov_msg, Velocity_local_msg] #slice and tailor line for csv, cut off leading and trailing info
-        with open("/home/james/Iceberg/MultiSubNode/logged.csv", 'a') as file:
+        with open("/home/icebergasv/logged.csv", 'a') as file:
             csv.writer(file).writerow(fields)
 
 def main():
-    with open("/home/james/Iceberg/MultiSubNode/logged.csv", 'a') as file:
+    with open("/home/icebergasv/logged.csv", 'a') as file:
         titlerow = ["Compass_hdg_msg", "Global_msg", "Gp_lp_offset_msg", "Gp_orgin_msg", "Local_msg", "Fix_msg", "Gps_vel_msg", "Satellites_msg", "Rel_alt_msg", "Accel_msg", "Odom_msg", "Pose_msg", "Pose_cov_msg", "Velocity_body_msg", "Velocity_body_cov_msg", "Velocity_local_msg"]
         csv.writer(file).writerow(titlerow)
     rclpy.init()
