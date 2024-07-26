@@ -20,9 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-                "syncer = logger_node.multi_logger:main",
-                "pub1 = logger_node.pub1:main",
-                "pub2 = logger_node.pub2:main"
+                "syncer = logger_node.multi_logger:main"
         ],
     },
 )
